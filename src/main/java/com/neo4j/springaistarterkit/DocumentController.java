@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 public class DocumentController {
     private final OpenAiChatClient client;
     private final Neo4jVectorStore vectorStore;
