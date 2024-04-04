@@ -1,1 +1,0 @@
-= Spring AI Neo4j Starter Kit
