@@ -6,10 +6,10 @@ import org.springframework.data.neo4j.repository.query.Query;
 import java.util.List;
 
 public interface DocumentRepository extends Neo4jRepository<Chunk, String> {
-    @Query("MATCH (c:Chunk)-[r:PART_OF]->(f:Form) " +
-            "WHERE c.chunkId IN $similarChunkIds " +
-            "OPTIONAL MATCH (form)<-[r2:FILED]-(co:Company) " +
-            "OPTIONAL MATCH (co)<-[r3:OWNS_STOCK_IN]-(m:Manager) " +
-            "RETURN doc, collect(r), collect(form), collect(r2), collect(co), collect(r3), collect(m);")
+    @Query("MATCH (chunk:Chunk)-[r:PART_OF]->(form:Form) " +
+            "WHERE chunk.chunkId IN $similarChunkIds " +
+            "OPTIONAL MATCH (form)<-[r2:FILED]-(company:Company) " +
+            "OPTIONAL MATCH (company)<-[r3:OWNS_STOCK_IN]-(manager:Manager) " +
+            "RETURN chunk, collect(r), collect(form), collect(r2), collect(company), collect(r3), collect(manager);")
     List<Chunk> getRelatedEntitiesForSimilarChunks(List<String> similarChunkIds);
 }

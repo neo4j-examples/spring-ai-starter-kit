@@ -37,7 +37,7 @@ public class SpringAiStarterKitApplication {
 				Neo4jVectorStore.Neo4jVectorStoreConfig.builder()
 						.withIndexName("form_10k_chunks")
 						.withLabel("Chunk")
-						.withEmbeddingProperty("textopenaiembedding")
+						.withEmbeddingProperty("textEmbedding")
 						.build());
 	}
 
