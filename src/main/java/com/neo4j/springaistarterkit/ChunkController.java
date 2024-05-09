@@ -16,12 +16,12 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
-public class DocumentController {
+public class ChunkController {
     private final OpenAiChatClient client;
     private final Neo4jVectorStore vectorStore;
-    private final DocumentRepository repo;
+    private final ChunkRepository repo;
 
-    public DocumentController(OpenAiChatClient client, Neo4jVectorStore vectorStore, DocumentRepository repo) {
+    public ChunkController(OpenAiChatClient client, Neo4jVectorStore vectorStore, ChunkRepository repo) {
         this.client = client;
         this.vectorStore = vectorStore;
         this.repo = repo;

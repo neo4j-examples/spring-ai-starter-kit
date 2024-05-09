@@ -5,7 +5,7 @@ import org.springframework.data.neo4j.repository.query.Query;
 
 import java.util.List;
 
-public interface DocumentRepository extends Neo4jRepository<Chunk, String> {
+public interface ChunkRepository extends Neo4jRepository<Chunk, String> {
     @Query("MATCH (chunk:Chunk)-[r:PART_OF]->(form:Form) " +
             "WHERE chunk.chunkId IN $similarChunkIds " +
             "OPTIONAL MATCH (form)<-[r2:FILED]-(company:Company) " +
