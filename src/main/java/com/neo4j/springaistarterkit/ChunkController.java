@@ -2,7 +2,7 @@ package com.neo4j.springaistarterkit;
 
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.ai.document.Document;
-import org.springframework.ai.openai.OpenAiChatClient;
+import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.vectorstore.Neo4jVectorStore;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,12 +17,12 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api")
 public class ChunkController {
-    private final OpenAiChatClient client;
+    private final OpenAiChatModel chatModel;
     private final Neo4jVectorStore vectorStore;
     private final ChunkRepository repo;
 
-    public ChunkController(OpenAiChatClient client, Neo4jVectorStore vectorStore, ChunkRepository repo) {
-        this.client = client;
+    public ChunkController(OpenAiChatModel chatModel, Neo4jVectorStore vectorStore, ChunkRepository repo) {
+        this.chatModel = chatModel;
         this.vectorStore = vectorStore;
         this.repo = repo;
     }
@@ -53,6 +53,6 @@ public class ChunkController {
         System.out.println("----- PROMPT -----");
         System.out.println(template.render());
 
-        return client.call(template.create().getContents());
+        return chatModel.call(template.create().getContents());
     }
 }
