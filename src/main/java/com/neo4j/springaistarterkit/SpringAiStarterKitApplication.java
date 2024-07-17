@@ -28,7 +28,7 @@ public class SpringAiStarterKitApplication {
 						.withIndexName("form_10k_chunks")
 						.withLabel("Chunk")
 						.withEmbeddingProperty("textEmbedding")
-						.build(), false);
+						.build(), true);
 	}
 
 }
