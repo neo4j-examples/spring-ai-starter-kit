@@ -3,8 +3,7 @@ package com.neo4j.springaistarterkit;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.ai.document.Document;
-import org.springframework.ai.vectorstore.Neo4jVectorStore;
-import org.springframework.ai.vectorstore.SearchRequest;
+import org.springframework.ai.vectorstore.neo4j.Neo4jVectorStore;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +28,7 @@ public class ChunkController {
 
     @GetMapping("/chat")
     String getGeneratedResponse(@RequestParam String question) {
-        List<Document> results = vectorStore.similaritySearch(SearchRequest.query(question));
+        List<Document> results = vectorStore.similaritySearch(question);
 
         System.out.println("Id list to graph: " + results.stream()
                 .map(Document::getId)
@@ -47,12 +46,11 @@ public class ChunkController {
                 on the insights derived from the following data:
                                 
                 {graph_result}
-                """,
-                Map.of("question", question,
-                        "graph_result", docList.stream().map(chunk -> chunk.toString()).collect(Collectors.joining("\n"))));
+                """).create(Map.of("question", question,
+                "graph_result", docList.stream().map(chunk -> chunk.toString()).collect(Collectors.joining("\n"))));
         System.out.println("----- PROMPT -----");
-        System.out.println(template.render());
+        System.out.println(template);
 
-        return client.prompt(template.create()).call().content();
+        return client.prompt(template).call().content();
     }
 }
