@@ -9,5 +9,4 @@ public class SpringAiStarterKitApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringAiStarterKitApplication.class, args);
 	}
-
 }
